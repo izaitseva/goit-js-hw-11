@@ -1,31 +1,74 @@
-body {
-    background-color: rgb(49, 143, 143);
-}
 .search-form {
-background-color: beige;
-border-radius: 30px;
-display: flex;
-align-items: center;
-justify-content: center;
-height: 100%;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 input {
     background-color: transparent;
-    border-color: #04AA6D;
+    border: 2px solid #04AA6D;
     padding: 16px 32px;
     margin: 4px 2px;
     cursor: pointer;
+    height: 12px;
+    line-height: 24px;
     border-radius: 30px;
 }
 
+input::placeholder{
+    color: #04AA6D;
+    font-size: 16px;
+  }
+
 button {
-    background-color: #04AA6D;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #04AA6D;
     border-radius: 30px;
+    box-sizing: border-box;
+    color: #04AA6D;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+button:after {
+    background-color: #04AA6D;
+    border-radius: 30px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -1px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+}
+
+button:hover:after {
+    transform: translate(0, 0);
+}
+
+button:active {
+    background-color: #04AA6D;
+    color: white;
+    outline: 0;
+}
+
+button:hover {
+    outline: 0;
 }
