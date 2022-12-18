@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(49, 143, 143);
+}
+.search-form {
+background-color: beige;
+border-radius: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100%;
+}
+
+input {
+    background-color: transparent;
+    border-color: #04AA6D;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 30px;
+}
