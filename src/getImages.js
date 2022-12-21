@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Notify } from "notiflix";
 const KEY = '12755760-d2e38158efcb067b906f81c79';
 const PER_PAGE = 40;
 const SEARCH_PARAMS = 'image_type=photo&orientation=horizontal&safesearch=true';
@@ -15,7 +16,7 @@ export async function getImages(search, page) {
             views: el.views,
             comments: el.comments,
             downloads: el.downloads,
-            totalHits: el.totalHits
+            totalHits: el.totalHits,
         }
     });
     return images;
