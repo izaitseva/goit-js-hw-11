@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +8,21 @@
   <title>HW-11</title>
   <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
 
   <form class="search-form" id="search-form">
     <div class="form-div">
-    <input
-      type="text"
-      name="searchQuery"
-      autocomplete="off"
-      placeholder="Search images..."
-    />
-    <button type="submit">Search</button>
-  </div>
+      <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+      <button type="submit">Search</button>
+    </div>
     <div class="gallery">
       <!-- Картки зображень -->
     </div>
+    <button type="button" class="load-more" style="display: none;">Load more</button>
   </form>
-  
-  <button type="button" class="load-more">Load more</button>
 
   <script src="./index.js" type="module"></script>
 </body>
+
 </html>
