@@ -72,3 +72,11 @@ function loadMore() {
             }
         })
 }
+
+window.addEventListener('scroll', () => {
+    const {scrollHeight, scrollTop, clientHeight} = document.documentElement
+
+    if(scrollTop === scrollHeight - clientHeight) {
+        loadMore()
+    }
+})
