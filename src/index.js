@@ -51,6 +51,7 @@ async function searchData(event) {
             btnEl.style.display = "";
             Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
             renderImages(data.images);
+            lightbox.refresh();
         }
         console.log(data);
     } catch {
@@ -105,7 +106,8 @@ async function loadMore() {
             Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
             reachedTheEnd = true;
         } else {
-            renderImages(data.images)
+            renderImages(data.images);
+            lightbox.refresh();
         }
     }
     catch {
