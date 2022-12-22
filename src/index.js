@@ -20,16 +20,15 @@ function searchData(event) {
     page = 1;
     getImages(searchString, page).then(data => {
 
-        if (data.length === 0) {
+        if (data.images.length === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
             btnEl.style.display = 'none'
         } else if (!searchString) {
-            Notiflix.Notify.info('Please try again.');
+            Notiflix.Notify.info('Please fill the field.');
             btnEl.style.display = 'none'
         } else {
             btnEl.style.display = "";
-            renderImages(data);
-
+            renderImages(data.images);
         }
         console.log(data);
     });

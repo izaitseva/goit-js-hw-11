@@ -5,7 +5,7 @@ const PER_PAGE = 40;
 const SEARCH_PARAMS = 'image_type=photo&orientation=horizontal&safesearch=true';
 
 export async function getImages(search, page) {
-    const URL = `https://pixabay.com/api/?key=${KEY}&${SEARCH_PARAMS}&q=${search}&page=${page}&per_page=${PER_PAGE}/`;
+    const URL = `https://pixabay.com/api/?key=${KEY}&${SEARCH_PARAMS}&q=${search}&page=${page}&per_page=${PER_PAGE}`;
     const response = await axios.get(URL);
     const images = response.data.hits.map(el => {
         return {
@@ -19,5 +19,9 @@ export async function getImages(search, page) {
             totalHits: el.totalHits,
         }
     });
-    return images;
+    return {
+        total: response.data.total,
+        totalHits: response.data.totalHits,
+        images: images
+    }
 }
