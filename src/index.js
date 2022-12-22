@@ -51,11 +51,11 @@ async function searchData(event) {
             btnEl.style.display = "";
             Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
             renderImages(data.images);
-            simpleLightBox.refresh();
         }
         console.log(data);
     } catch {
-        Notiflix.Notify.failure("Error");
+        // simpleLightBox.refresh();
+        Notiflix.Notify.failure("Failure");
     }
 }
 
@@ -96,7 +96,7 @@ async function loadMore() {
 
     page++
 
-    simpleLightBox.refresh();
+    // simpleLightBox.refresh();
     let data = await getImages(searchString, page)
 
     try {
@@ -122,8 +122,9 @@ window.addEventListener('scroll', () => {
     }
 })
 
-let lightbox = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.photo-card a', {
     captions: true,
     captionsData: "alt",
-    captionDelay: 250
+    captionDelay: 250,
+    scrollZoom: false,
 });
