@@ -75,6 +75,7 @@ function loadMore() {
 window.addEventListener('scroll', () => {
     const {scrollHeight, scrollTop, clientHeight} = document.documentElement
 
+    btnEl.style.display = 'none'
     if(scrollTop === scrollHeight - clientHeight) {
         loadMore()
     }
