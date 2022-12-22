@@ -18,8 +18,8 @@ function searchData(event) {
     reachedTheEnd = false;
     searchString = inputRef.value.trim();
     gallery.innerHTML = '';
-
     page = 1;
+
     getImages(searchString, page).then(data => {
 
         if (data.images.length === 0) {
@@ -30,6 +30,7 @@ function searchData(event) {
             btnEl.style.display = 'none'
         } else {
             btnEl.style.display = "";
+            Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
             renderImages(data.images);
         }
         console.log(data);
@@ -65,6 +66,7 @@ function renderImages(images) {
 btnEl.addEventListener('click', loadMore)
 
 function loadMore() {
+
     if (reachedTheEnd)
         return;
 
