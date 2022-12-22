@@ -14,7 +14,7 @@ formRef.addEventListener('submit', searchData);
 
 function searchData(event) {
     event.preventDefault();
-    searchString = inputRef.value;
+    searchString = inputRef.value.trim();
     gallery.innerHTML = '';
 
     page = 1;
@@ -23,9 +23,13 @@ function searchData(event) {
         if (data.length === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
             btnEl.style.display = 'none'
+        } else if (!searchString) {
+            Notiflix.Notify.info('Please try again.');
+            btnEl.style.display = 'none'
         } else {
             btnEl.style.display = "";
             renderImages(data);
+
         }
         console.log(data);
     });
