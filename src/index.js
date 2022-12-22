@@ -7,14 +7,22 @@ let formRef = document.querySelector('.search-form');
 let inputRef = document.querySelector('[name=searchQuery]');
 let gallery = document.querySelector('.gallery');
 let btnEl = document.querySelector('.load-more');
+let searchBtn = document.querySelector('.search_btn');
 let page = 1;
 let searchString;
 let reachedTheEnd = false;
 
+
 formRef.addEventListener('submit', searchData);
+inputRef.addEventListener('input', inputEvent);
+
+function inputEvent(ev) {
+    searchBtn.disabled = false;
+}
 
 function searchData(event) {
     event.preventDefault();
+    searchBtn.disabled = true;
     reachedTheEnd = false;
     searchString = inputRef.value.trim();
     gallery.innerHTML = '';

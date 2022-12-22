@@ -59,7 +59,8 @@ input[type=text] {
 }
 
 button[disabled]{
-    display: none;
+    border: 2px solid #04AA6D;
+    color: #bfcec8;
 }
 
 button[disabled]:after {
