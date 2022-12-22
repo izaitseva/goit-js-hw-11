@@ -9,11 +9,13 @@ let gallery = document.querySelector('.gallery');
 let btnEl = document.querySelector('.load-more');
 let page = 1;
 let searchString;
+let reachedTheEnd = false;
 
 formRef.addEventListener('submit', searchData);
 
 function searchData(event) {
     event.preventDefault();
+    reachedTheEnd = false;
     searchString = inputRef.value.trim();
     gallery.innerHTML = '';
 
@@ -63,14 +65,18 @@ function renderImages(images) {
 btnEl.addEventListener('click', loadMore)
 
 function loadMore() {
+    if (reachedTheEnd)
+        return;
+
     page++
     getImages(searchString, page)
         .then(data => {
-            if (data.length === 0) {
+            if (data.images.length === 0 && !reachedTheEnd) {
                 btnEl.style.display = 'none'
                 Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+                reachedTheEnd = true;
             } else {
-                renderImages(data)
+                renderImages(data.images)
             }
         })
 }
