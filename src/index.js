@@ -3,8 +3,8 @@ import './css/styles.css'
 import Notiflix from 'notiflix';
 import { getImages } from './getImages';
 import easyScroll from 'easy-scroll';
-
-import easyScroll from 'easy-scroll';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 easyScroll({
     'scrollableDomEle': window,
@@ -40,7 +40,6 @@ async function searchData(event) {
     page = 1;
 
     let data = await getImages(searchString, page)
-
     try {
         if (data.images.length === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
@@ -50,8 +49,9 @@ async function searchData(event) {
             btnEl.style.display = 'none'
         } else {
             btnEl.style.display = "";
-            Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
+            Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
             renderImages(data.images);
+            simpleLightBox.refresh();
         }
         console.log(data);
     } catch {
@@ -62,7 +62,9 @@ async function searchData(event) {
 function renderImages(images) {
     const markup = images.map(item => `
     <div class="photo-card">
-        <img src="${item.webformatURL}" alt="" loading="lazy" />
+        <a href="${item.largeImageURL}"> 
+            <img src="${item.webformatURL}" alt="${item.tags}" loading="lazy"/>
+        </a>
         <div class="info">
             <p class="info-item">
                 <b>Likes</b>
@@ -93,8 +95,10 @@ async function loadMore() {
         return;
 
     page++
+
+    simpleLightBox.refresh();
     let data = await getImages(searchString, page)
-    
+
     try {
         if (data.images.length === 0 && !reachedTheEnd) {
             btnEl.style.display = 'none'
@@ -117,3 +121,9 @@ window.addEventListener('scroll', () => {
         loadMore()
     }
 })
+
+let lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionsData: "alt",
+    captionDelay: 250
+});

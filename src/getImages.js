@@ -22,6 +22,6 @@ export async function getImages(search, page) {
     return {
         total: response.data.total,
         totalHits: response.data.totalHits,
-        images: images
+        images: images,
     }
 }
