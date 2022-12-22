@@ -2,6 +2,17 @@
 import './css/styles.css'
 import Notiflix from 'notiflix';
 import { getImages } from './getImages';
+import easyScroll from 'easy-scroll';
+
+import easyScroll from 'easy-scroll';
+
+easyScroll({
+    'scrollableDomEle': window,
+    'direction': 'bottom',
+    'duration': 2000,
+    'easingPreset': 'easeInQuad',
+    'scrollAmount': 1000
+});
 
 let formRef = document.querySelector('.search-form');
 let inputRef = document.querySelector('[name=searchQuery]');
@@ -20,7 +31,7 @@ function inputEvent(ev) {
     searchBtn.disabled = false;
 }
 
-function searchData(event) {
+async function searchData(event) {
     event.preventDefault();
     searchBtn.disabled = true;
     reachedTheEnd = false;
@@ -28,8 +39,9 @@ function searchData(event) {
     gallery.innerHTML = '';
     page = 1;
 
-    getImages(searchString, page).then(data => {
+    let data = await getImages(searchString, page)
 
+    try {
         if (data.images.length === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
             btnEl.style.display = 'none'
@@ -42,7 +54,9 @@ function searchData(event) {
             renderImages(data.images);
         }
         console.log(data);
-    });
+    } catch {
+        Notiflix.Notify.failure("Error");
+    }
 }
 
 function renderImages(images) {
@@ -73,29 +87,33 @@ function renderImages(images) {
 }
 btnEl.addEventListener('click', loadMore)
 
-function loadMore() {
+async function loadMore() {
 
     if (reachedTheEnd)
         return;
 
     page++
-    getImages(searchString, page)
-        .then(data => {
-            if (data.images.length === 0 && !reachedTheEnd) {
-                btnEl.style.display = 'none'
-                Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-                reachedTheEnd = true;
-            } else {
-                renderImages(data.images)
-            }
-        })
+    let data = await getImages(searchString, page)
+    
+    try {
+        if (data.images.length === 0 && !reachedTheEnd) {
+            btnEl.style.display = 'none'
+            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+            reachedTheEnd = true;
+        } else {
+            renderImages(data.images)
+        }
+    }
+    catch {
+        Notiflix.Notify.failure("Error");
+    }
 }
 
 window.addEventListener('scroll', () => {
-    const {scrollHeight, scrollTop, clientHeight} = document.documentElement
+    const { scrollHeight, scrollTop, clientHeight } = document.documentElement
 
     btnEl.style.display = 'none'
-    if(scrollTop === scrollHeight - clientHeight) {
+    if (scrollTop === scrollHeight - clientHeight) {
         loadMore()
     }
 })
