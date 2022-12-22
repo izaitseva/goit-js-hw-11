@@ -57,7 +57,6 @@ function renderImages(images) {
     `).join('')
     gallery.insertAdjacentHTML("beforeend", markup);
 }
-
 btnEl.addEventListener('click', loadMore)
 
 function loadMore() {
