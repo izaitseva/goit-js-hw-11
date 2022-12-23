@@ -39,6 +39,10 @@ async function searchData(event) {
     gallery.innerHTML = '';
     page = 1;
 
+    if (searchString === "") {
+        return
+    }
+    
     let data = await getImages(searchString, page)
     try {
         if (data.images.length === 0) {
